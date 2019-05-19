@@ -8,7 +8,7 @@ If you use this, You Should be able to take tickets difficult to obtain.
 ## how to use
 ```php
 $t = new TicketPia('teto');
-echo(json_encode($t->getArrayList()));
+$t->echoJson();
 ```
 
 ```

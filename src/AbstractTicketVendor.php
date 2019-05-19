@@ -17,6 +17,11 @@ abstract class AbstractTicketVendor
         $this->requestUrl = $url . urlencode($keyWord);
     }
 
+    public function echoJson() : string
+    {
+        echo json_encode($this->getList());
+    }
+
     abstract public function getList() : array;
 
     public function format(string $title, string $dateTime, string $place, string $saleMethod, string $saleStatus, string $link) : array
