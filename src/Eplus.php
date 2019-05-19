@@ -23,14 +23,7 @@ class Eplus extends AbstractTicketVendor
         );
 
         $arrRet = [];
-        $weekName = ['日', '月', '火', '水', '木', '金', '土'];
         foreach ($arrData['data']['record_list'] as $arrDataTmp) {
-            $date = strtotime($arrDataTmp['koenbi_term']);
-            if ($date) {
-                $dateStr = date('Y/n/d', $date);
-                $w = date('w', $date);
-            }
-
             $koenList = $arrDataTmp['kanren_uketsuke_koen_list'][0];
             $saleStatus = $this->convertStatus(
                 $koenList['uketsuke_status'],
@@ -40,7 +33,7 @@ class Eplus extends AbstractTicketVendor
 
             $arrRet[] = $this->format(
                 $arrDataTmp['kanren_kogyo_sub']['kogyo_name_1'],
-                "${dateStr}({$weekName[$w]})",
+                $this->convertData($arrDataTmp['koenbi_term']),
                 "{$arrDataTmp['kanren_venue']['venue_name']}({$arrDataTmp['kanren_venue']['todofuken_name']})",
                 $koenList['hambai_hoho_label'],
                 $saleStatus,
@@ -49,6 +42,20 @@ class Eplus extends AbstractTicketVendor
         }
 
         return $arrRet;
+    }
+
+    private static function convertDate(string $timestamp) : string
+    {
+        $dateTime = '';
+        $weekName = ['日', '月', '火', '水', '木', '金', '土'];
+        $date = strtotime($timestamp);
+        if ($date) {
+            $dateStr = date('Y/n/j', $date);
+            $w = date('w', $date);
+            $dateTime = "${dateStr}({$weekName[$w]})";
+        }
+
+        return $dateTime;
     }
 
     private static function convertStatus(string $uketsukeStatus, bool $eplusToriatsukaiAriFlag, bool $kyuenFlag) : string

@@ -11,6 +11,7 @@ class EplusTest extends TestCase
     /** @var Eplus */
     public $eplus;
     public $convertStatus;
+    public $convertDate;
 
     protected function setUp() : void
     {
@@ -19,12 +20,26 @@ class EplusTest extends TestCase
         $reflection = new \ReflectionClass($this->eplus);
         $this->convertStatus = $reflection->getMethod('convertStatus');
         $this->convertStatus->setAccessible(true);
+
+        $this->convertDate = $reflection->getMethod('convertDate');
+        $this->convertDate->setAccessible(true);
     }
 
     public function testIsInstanceOfEplus() : void
     {
         $actual = $this->eplus;
         $this->assertInstanceOf(AbstractTicketVendor::class, $actual);
+    }
+
+    public function test_convertDate() : void
+    {
+        $this->assertSame(
+            '2019/1/1(火)',
+            $this->convertDate->invoke(
+                $this->eplus,
+                '2019-01-01'
+            )
+        );
     }
 
     public function test_convertStatus_受付中() : void
