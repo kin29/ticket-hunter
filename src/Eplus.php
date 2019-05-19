@@ -54,18 +54,18 @@ class Eplus extends AbstractTicketVendor
     private static function convertStatus(string $uketsukeStatus, bool $eplusToriatsukaiAriFlag, bool $kyuenFlag) : string
     {
         $ret = 7;
-        if (true == $kyuenFlag) {
+        if (true === $kyuenFlag) {
             $ret = 6;
-        } elseif (false == $eplusToriatsukaiAriFlag) {
+        } elseif (false === $eplusToriatsukaiAriFlag) {
             $ret = 5;
-        } elseif (true == $eplusToriatsukaiAriFlag) {
-            if (0 == $uketsukeStatus) {
+        } elseif (true === $eplusToriatsukaiAriFlag) {
+            if ('0' === $uketsukeStatus) {
                 $ret = 1;
-            } elseif (1 == $uketsukeStatus) {
+            } elseif ('1' === $uketsukeStatus) {
                 $ret = 2;
-            } elseif (2 == $uketsukeStatus || 3 == $uketsukeStatus) {
+            } elseif ('2' === $uketsukeStatus || '3' === $uketsukeStatus) {
                 $ret = 3;
-            } elseif (4 == $uketsukeStatus || 5 == $uketsukeStatus) {
+            } elseif ('4' === $uketsukeStatus || '5' === $uketsukeStatus) {
                 $ret = 4;
             }
         }
