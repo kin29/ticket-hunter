@@ -4,25 +4,17 @@ declare(strict_types=1);
 
 namespace Kin29\TicketHunter;
 
-use Goutte\Client;
-
-abstract class AbstractTicketVendor
+trait Format
 {
-    public $client;
-    public $requestUrl;
-
-    public function __construct(string $keyWord = '', string $url = '')
+    public function toJson() : string
     {
-        $this->client = new Client();
-        $this->requestUrl = $url . urlencode($keyWord);
+        return json_encode($this->getList());
     }
 
     public function echoJson() : void
     {
-        echo json_encode($this->getList());
+        echo $this->toJson();
     }
-
-    abstract public function getList() : array;
 
     public function format(string $title, string $dateTime, string $place, string $saleMethod, string $saleStatus, string $link) : array
     {

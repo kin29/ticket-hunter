@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kin29\TicketHunter;
+namespace Kin29\TicketHunter\Seller;
 
 class LawsonTicket extends AbstractTicketVendor
 {
