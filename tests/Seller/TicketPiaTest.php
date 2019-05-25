@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kin29\TicketHunter;
+namespace Kin29\TicketHunter\Seller;
 
-use PHPStan\Testing\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class TicketPiaTest extends TestCase
 {
