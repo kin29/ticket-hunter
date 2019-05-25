@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Kin29\TicketHunter;
 
+use Kin29\TicketHunter\Exception\LogicException;
+
 class TicketHunter
 {
     use Format;
@@ -14,6 +16,9 @@ class TicketHunter
     {
         foreach ($arrVendorName as $vendorName) {
             $className = __NAMESPACE__ . '\\Seller\\' . $vendorName;
+            if (!class_exists($className)) {
+                throw new LogicException("Class \"{$className}\" not found\n");
+            }
             $this->arrVendorObj[$vendorName] = new $className($keyWord);
         }
     }

@@ -11,8 +11,12 @@ If you use this, You Should be able to take tickets difficult to obtain.
 ※チケット販売店をキーに持つことができます  
 ```php
 // TicketPia / Eplus / LawsonTicket に対応中
-$ticketVendors = new TicketHunter(['TicketPia', 'Eplus', 'LawsonTicket'], 'teto');
-$ticketVendors->echoJson();
+try {
+  $ticketVendors = new TicketHunter(['TicketPia', 'Eplus', 'LawsonTicket'], 'teto');
+  $ticketVendors->echoJson();
+} catch (\Exception $e) {
+    die($e->getMessage());
+}
 ```
 
 ```
