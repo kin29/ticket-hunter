@@ -52,7 +52,7 @@ class Eplus extends AbstractTicketVendor
         if ($date) {
             $dateStr = date('Y/n/j', $date);
             $w = date('w', $date);
-            $dateTime = "${dateStr}({$weekName[$w]})";
+            $dateTime = "{$dateStr}({$weekName[$w]})";
         }
 
         return $dateTime;
