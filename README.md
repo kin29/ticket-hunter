@@ -10,6 +10,9 @@ You can choose.
 - LawsonTicket
 
 ## how to use
+```bash
+composer require kin29/ticket-hunter
+```
 
 ### when you search multiple ticket-saller
 ※has key(=ticket-saller name)
