@@ -1,6 +1,7 @@
 {
     "name": "kin29/ticket-hunter",
-    "description": "",
+    "description": "You can search ticket info with artist-name(or keyword) from several vender.",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -9,7 +10,7 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
+        "php": "7.1.0",
         "fabpot/goutte": "^3.2"
     },
     "require-dev": {
