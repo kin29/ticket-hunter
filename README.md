@@ -1,4 +1,5 @@
-# ticket-hunter
+# ticket-hunter 
+[![Build Status](https://travis-ci.org/kin29/ticket-hunter.svg?branch=master)](https://travis-ci.org/kin29/ticket-hunter)
 
 You can search ticket info with artist-name(or keyword) from several vender.  
 If you use this, You Should be able to take tickets difficult to obtain.
