@@ -56,14 +56,17 @@ trait Format
         '47' => '沖縄県',
     ];
 
-    public function toJson() : string
+    /**
+     * @return false|string
+     */
+    public function toJson(array $arrList)
     {
-        return json_encode($this->getList());
+        return json_encode($arrList);
     }
 
-    public function echoJson() : void
+    public function echoJson(array $arrList) : void
     {
-        echo $this->toJson();
+        echo $this->toJson($arrList);
     }
 
     public function format(
@@ -100,7 +103,9 @@ trait Format
     public function separateStageAndPref(string $place) : array
     {
         $arrRet = preg_split('/(\(|\（)/u', $place);
-        $arrRet[1] = preg_replace('/(\)|\）)/u', '', $arrRet[1]);
+        if ($arrRet[1] !== null) {
+            $arrRet[1] = preg_replace('/(\)|\）)/u', '', $arrRet[1]);
+        }
 
         return [trim($arrRet[0]), trim($arrRet[1])];
     }

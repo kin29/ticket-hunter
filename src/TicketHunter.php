@@ -25,6 +25,7 @@ class TicketHunter
 
     public function getList() : array
     {
+        $vendorList = [];
         foreach ($this->arrVendorObj as $name => $obj) {
             $vendorList[$name] = $obj->getList();
         }

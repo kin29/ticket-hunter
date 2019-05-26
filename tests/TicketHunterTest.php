@@ -6,6 +6,9 @@ namespace Kin29\TicketHunter;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+ */
 class TicketHunterTest extends TestCase
 {
     /**

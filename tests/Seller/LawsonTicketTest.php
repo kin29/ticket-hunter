@@ -6,6 +6,9 @@ namespace Kin29\TicketHunter\Seller;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+ */
 class LawsonTicketTest extends TestCase
 {
     /** @var LawsonTicket */

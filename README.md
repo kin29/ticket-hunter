@@ -5,7 +5,6 @@ If you use this, You Should be able to take tickets difficult to obtain.
   
 You can choose.
 - TicketPia
-
 - Eplus
 - LawsonTicket
 
@@ -15,8 +14,8 @@ You can choose.
 ※has key(=ticket-saller name)
 ```php
 try {
-  $ticketVendors = new TicketHunter(['TicketPia', 'Eplus', 'LawsonTicket'], '[artist-name(or keyword)]');
-  $ticketVendors->echoJson();
+  $ticketVendors = new Kin29\TicketHunter\TicketHunter(['TicketPia', 'Eplus', 'LawsonTicket'], '[artist-name(or keyword)]');
+  $ticketVendors->echoJson($ticketVendors->getList());
 } catch (\Exception $e) {
     die($e->getMessage());
 }
@@ -67,8 +66,8 @@ try {
 ### when you search single ticket-saller
 ```php
 // TicketPiaの場合
-$ticketPia = new TicketPia('[artist-name(or keyword)]');
-$ticketPia->echoJson();
+$ticketPia = new Kin29\TicketHunter\Seller\TicketPia('[artist-name(or keyword)]');
+$ticketPia->echoJson($ticketPia->getList());
 ```
 
 ```
