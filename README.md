@@ -1,18 +1,21 @@
 # ticket-hunter
 
-...ticket-info-api
-
-It is api to get ticket info from several vender.  
+You can search ticket info with artist-name(or keyword) from several vender.  
 If you use this, You Should be able to take tickets difficult to obtain.
+  
+You can choose.
+- TicketPia
+
+- Eplus
+- LawsonTicket
 
 ## how to use
 
-### 複数のチケット販売店を指定
-※チケット販売店をキーに持つことができます  
+### when you search multiple ticket-saller
+※has key(=ticket-saller name)
 ```php
-// TicketPia / Eplus / LawsonTicket に対応中
 try {
-  $ticketVendors = new TicketHunter(['TicketPia', 'Eplus', 'LawsonTicket'], 'teto');
+  $ticketVendors = new TicketHunter(['TicketPia', 'Eplus', 'LawsonTicket'], '[artist-name(or keyword)]');
   $ticketVendors->echoJson();
 } catch (\Exception $e) {
     die($e->getMessage());
@@ -61,10 +64,10 @@ try {
 ```
   
   
-### 単一のチケット販売店を指定
+### when you search single ticket-saller
 ```php
 // TicketPiaの場合
-$ticketPia = new TicketPia('teto');
+$ticketPia = new TicketPia('[artist-name(or keyword)]');
 $ticketPia->echoJson();
 ```
 
