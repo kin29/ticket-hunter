@@ -21,10 +21,13 @@ class LawsonTicket extends AbstractTicketVendor
             $link .= '&gEntryMthd=' . urlencode($aTag->attr('data-rcptypename')) . '&gScheduleNo=' . urlencode($aTag->attr('data-schduleno'));
             $link .= '&gPfName=' . urlencode($aTag->attr('data-prfname')) . '&gBaseVenueCd=' . urlencode($aTag->attr('data-basevenuecd'));
 
+            list($stage, $pref) = $this->separateStageAndPref($info->eq(1)->text());
+
             return $this->format(
                 $element->filter('.mainTitle')->text(),
                 $info->eq(0)->text(),
-                $info->eq(1)->text(),
+                $pref,
+                $stage,
                 $info->eq(2)->filter('#reception_typename')->text(),
                 $info->eq(3)->filter('.orderStates .textSStat')->text(),
                 $link

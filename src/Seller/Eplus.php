@@ -34,7 +34,8 @@ class Eplus extends AbstractTicketVendor
             $arrRet[] = $this->format(
                 $arrDataTmp['kanren_kogyo_sub']['kogyo_name_1'],
                 $this->convertDate($arrDataTmp['koenbi_term']),
-                "{$arrDataTmp['kanren_venue']['venue_name']}({$arrDataTmp['kanren_venue']['todofuken_name']})",
+                $arrDataTmp['kanren_venue']['todofuken_name'],
+                "{$arrDataTmp['kanren_venue']['venue_name']}",
                 $koenList['hambai_hoho_label'],
                 $saleStatus,
                 "https://eplus.jp/{$arrDataTmp['koen_detail_url_pc']}"
