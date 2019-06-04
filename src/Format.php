@@ -70,43 +70,56 @@ trait Format
     }
 
     public function format(
-        string $title,
-        string $dateTime,
-        string $prefName,
-        string $stage,
-        string $saleMethod,
-        string $saleStatus,
-        string $link
+        string $title = null,
+        string $dateTime = null,
+        string $prefName = null,
+        string $stage = null,
+        string $saleMethod = null,
+        string $saleStatus = null,
+        string $link = null
     ) : array {
         return [
-            'title' => $title,
-            'date_time' => $dateTime,
-            'pref_id' => $this->toPrefId($prefName),
-            'pref_name' => $prefName,
-            'stage' => $stage,
-            'sale_method' => $saleMethod,
-            'sale_status' => $saleStatus,
-            'link' => $link,
+            'title' => (string) $title,
+            'date_time' => (string) $dateTime,
+            'pref_id' => (string) $this->toPrefId($prefName),
+            'pref_name' => (string) $prefName,
+            'stage' => (string) $stage,
+            'sale_method' => (string) $saleMethod,
+            'sale_status' => (string) $saleStatus,
+            'link' => (string) $link,
         ];
     }
 
-    public function toPrefId(string $prefName) : string
+    public function toPrefId(string $prefName = null) : string
     {
-        return (string) array_search($prefName, $this->arrPref, true);
+        if ($prefName == null) {
+            return '';
+        }
+        $ret = array_search($prefName, $this->arrPref, true);
+
+        return (!$ret) ? '' : (string) $ret;
     }
 
-    public function toPrefName(string $prefId) : string
+    public function toPrefName(string $prefId = null) : string
     {
-        return $this->arrPref[$prefId];
-    }
-
-    public function separateStageAndPref(string $place) : array
-    {
-        $arrRet = preg_split('/(\(|\（)/u', $place);
-        if ($arrRet[1] !== null) {
-            $arrRet[1] = preg_replace('/(\)|\）)/u', '', $arrRet[1]);
+        if ($prefId == null) {
+            return '';
         }
 
-        return [trim($arrRet[0]), trim($arrRet[1])];
+        return (array_key_exists($prefId, $this->arrPref)) ? $this->arrPref[$prefId] : '';
+    }
+
+    public function separateStageAndPref(string $place = null) : array //todo $place = nullのときは？
+    {
+        if ($place == null) {
+            return ['', ''];
+        }
+        $arrTmp = preg_split('/(\(|\（)/u', $place);
+
+        $arrRet = [];
+        $arrRet[] = (isset($arrTmp[0])) ? trim($arrTmp[0]) : '';
+        $arrRet[] = (isset($arrTmp[1])) ? trim(preg_replace('/(\)|\）)/u', '', $arrTmp[1])) : '';
+
+        return $arrRet;
     }
 }

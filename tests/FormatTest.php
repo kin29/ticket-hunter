@@ -44,6 +44,22 @@ class FormatTest extends TestCase
         $this->assertSame($extected, $actual);
     }
 
+    public function test_format_null() : void
+    {
+        $actual = $this->formatObj->format();
+        $extected = [
+            'title' => '',
+            'date_time' => '',
+            'pref_id' => '',
+            'pref_name' => '',
+            'stage' => '',
+            'sale_method' => '',
+            'sale_status' => '',
+            'link' => '',
+        ];
+        $this->assertSame($extected, $actual);
+    }
+
     /**
      * @dataProvider prefAdditionProvider
      */
@@ -55,6 +71,22 @@ class FormatTest extends TestCase
         );
     }
 
+    public function test_toPrefId_no_exist() : void
+    {
+        $this->assertSame(
+            $this->formatObj->toPrefId('ロンドン'),
+            ''
+        );
+    }
+
+    public function test_toPrefId_null() : void
+    {
+        $this->assertSame(
+            $this->formatObj->toPrefId(null),
+            ''
+        );
+    }
+
     /**
      * @dataProvider prefAdditionProvider
      */
@@ -63,6 +95,30 @@ class FormatTest extends TestCase
         $this->assertSame(
             $this->formatObj->toPrefName($prefId),
             $prefName
+        );
+    }
+
+    public function test_toPrefName_no_exist_0() : void
+    {
+        $this->assertSame(
+            $this->formatObj->toPrefName('0'),
+            ''
+        );
+    }
+
+    public function test_toPrefName_no_exist_50() : void
+    {
+        $this->assertSame(
+            $this->formatObj->toPrefName('50'),
+            ''
+        );
+    }
+
+    public function test_toPrefName_null() : void
+    {
+        $this->assertSame(
+            $this->formatObj->toPrefName(null),
+            ''
         );
     }
 
@@ -126,6 +182,27 @@ class FormatTest extends TestCase
     {
         $actual = $this->formatObj->separateStageAndPref($stageAndPref);
         $expected = [$stage, $pref];
+        $this->assertSame($expected, $actual);
+    }
+
+    public function test_separateStageAndPref_null() : void
+    {
+        $actual = $this->formatObj->separateStageAndPref(null);
+        $expected = ['', ''];
+        $this->assertSame($expected, $actual);
+    }
+
+    public function test_separateStageAndPref_空() : void
+    {
+        $actual = $this->formatObj->separateStageAndPref('');
+        $expected = ['', ''];
+        $this->assertSame($expected, $actual);
+    }
+
+    public function test_separateStageAndPref_括弧なし() : void
+    {
+        $actual = $this->formatObj->separateStageAndPref('東京ドーム');
+        $expected = ['東京ドーム', ''];
         $this->assertSame($expected, $actual);
     }
 
