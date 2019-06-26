@@ -61,43 +61,39 @@ class Eplus extends AbstractTicketVendor
 
     private static function convertStatus(string $uketsukeStatus, bool $eplusToriatsukaiAriFlag, bool $kyuenFlag) : string
     {
-        $ret = 7;
-        if (true === $kyuenFlag) {
-            $ret = 6;
-        } elseif (false === $eplusToriatsukaiAriFlag) {
-            $ret = 5;
-        } elseif (true === $eplusToriatsukaiAriFlag) {
-            if ('0' === $uketsukeStatus) {
-                $ret = 1;
-            } elseif ('1' === $uketsukeStatus) {
-                $ret = 2;
-            } elseif ('2' === $uketsukeStatus || '3' === $uketsukeStatus) {
-                $ret = 3;
-            } elseif ('4' === $uketsukeStatus || '5' === $uketsukeStatus) {
-                $ret = 4;
-            }
+        /**
+         * $kyuenFlag               休演フラグ
+         * $eplusToriatsukaiAriFlag 扱いフラグ
+         * 1) $kyuenFlag=true(休演である) && $eplusToriatsukaiAriFlag=true(取り扱いあり);    => 「case 6[休演]」
+         * 2) $kyuenFlag=true(休演である) && $eplusToriatsukaiAriFlag=false(取り扱いなし);   => 「case 6[休演]」
+         * 3) $kyuenFlag=false(休演ではない) && $eplusToriatsukaiAriFlag=true(取り扱いなし); => 「case 5[扱いなし]」
+         * 4) $kyuenFlag=false(休演ではない) && $eplusToriatsukaiAriFlag=true(取り扱いあり); => 「case X[X=$uketsukeStatusによる]」
+         */
+
+        // 1) or 2)
+        if ($kyuenFlag) {
+            return '休演';
         }
 
-        $val = 7;
-        if ($ret < $val) {
-            $val = $ret;
+        // 3)
+        if (!$eplusToriatsukaiAriFlag) {
+            return '扱いなし';
         }
 
-        switch ($val) {
-            case 1:
-                return '受付中';
-            case 2:
-                return '予定枚数終了';
-            case 3:
-                return '受付前';
-            case 4:
-                return '受付終了';
-            case 5:
-                return '扱いなし';
-            case 6:
-                return '休演';
-            default:
-                return '';
+        // 4)
+        if ('0' === $uketsukeStatus) {
+            return '受付中';
         }
+        if ('1' === $uketsukeStatus) {
+            return '予定枚数終了';
+        }
+        if ('2' === $uketsukeStatus || '3' === $uketsukeStatus) {
+            return '受付前';
+        }
+        if ('4' === $uketsukeStatus || '5' === $uketsukeStatus) {
+            return '受付終了';
+        }
+
+        return '';
     }
 }
