@@ -18,7 +18,8 @@ class EplusTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->eplus = new Eplus('test');
+        $this->eplus = new Eplus;
+        $this->eplus->setKeyword('test');
 
         $reflection = new \ReflectionClass($this->eplus);
         $this->convertStatus = $reflection->getMethod('convertStatus');

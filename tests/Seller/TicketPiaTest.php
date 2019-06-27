@@ -16,7 +16,8 @@ class TicketPiaTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->ticketPia = new TicketPia('test');
+        $this->ticketPia = new TicketPia;
+        $this->ticketPia->setKeyword('test');
     }
 
     public function testIsInstanceOfEplus() : void

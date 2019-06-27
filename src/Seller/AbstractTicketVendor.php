@@ -11,10 +11,8 @@ abstract class AbstractTicketVendor
 {
     use Format;
 
-    /** @var $client Goutte\Client */
     public $client;
 
-    /** @var $requestUrl string */
     public $requestUrl;
 
     public function __construct(Client $client, string $url = '')

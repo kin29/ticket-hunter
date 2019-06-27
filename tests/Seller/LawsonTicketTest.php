@@ -16,7 +16,8 @@ class LawsonTicketTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->lawsonTicket = new LawsonTicket('test');
+        $this->lawsonTicket = new LawsonTicket;
+        $this->lawsonTicket->setKeyword('test');
     }
 
     public function testIsInstanceOfEplus() : void

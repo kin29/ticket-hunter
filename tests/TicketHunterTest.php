@@ -18,13 +18,13 @@ class TicketHunterTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->ticketHunter = new TicketHunter([], 'test');
+        $this->ticketHunter = new TicketHunter([]);
     }
 
     public function test_存在する販売店オブジェクトのみを渡した時_単数() : void
     {
         $vendorName = 'TicketPia';
-        $ticketHunter = new TicketHunter([$vendorName], 'test');
+        $ticketHunter = new TicketHunter([$vendorName]);
         $this->assertArrayHasKey($vendorName, $ticketHunter->arrVendorObj);
     }
 
@@ -33,7 +33,7 @@ class TicketHunterTest extends TestCase
         $vendorName1 = 'TicketPia';
         $vendorName2 = 'Eplus';
         $vendorName3 = 'LawsonTicket';
-        $ticketHunter = new TicketHunter([$vendorName1, $vendorName2, $vendorName3], 'test');
+        $ticketHunter = new TicketHunter([$vendorName1, $vendorName2, $vendorName3]);
         $this->assertArrayHasKey($vendorName1, $ticketHunter->arrVendorObj);
         $this->assertArrayHasKey($vendorName2, $ticketHunter->arrVendorObj);
         $this->assertArrayHasKey($vendorName3, $ticketHunter->arrVendorObj);
@@ -44,7 +44,7 @@ class TicketHunterTest extends TestCase
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('Class "Kin29\\TicketHunter\\Seller\\not_exist_vendor_name" not found');
 
-        new TicketHunter(['not_exist_vendor_name'], 'test');
+        new TicketHunter(['not_exist_vendor_name']);
     }
 
     public function test_存在しない販売店オブジェクトを渡した時_複数() : void
@@ -52,6 +52,6 @@ class TicketHunterTest extends TestCase
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('Class "Kin29\\TicketHunter\\Seller\\not_exist_vendor_name" not found');
 
-        new TicketHunter(['TicketPia', 'not_exist_vendor_name'], 'test');
+        new TicketHunter(['TicketPia', 'not_exist_vendor_name']);
     }
 }
