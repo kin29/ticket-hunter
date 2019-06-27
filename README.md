@@ -29,7 +29,7 @@ try {
 {
   "TicketPia": [
     {
-      "title" : "[ツアー名 or フェス名]"
+      "title" : "[ツアー名 or フェス名]",
       "date_time": "[開演日]",
       "pref_id": "[都道府県ID]",
       "pref_name": "[都道府県名]",
@@ -41,7 +41,7 @@ try {
   ],
   "Eplus": [
     {
-      "title" : "[ツアー名 or フェス名]"
+      "title" : "[ツアー名 or フェス名]",
       "date_time": "[開演日]",
       "pref_id": "[都道府県ID]",
       "pref_name": "[都道府県名]",
@@ -53,7 +53,7 @@ try {
   ],
   "LawsonTicket": [
     {
-      "title" : "[ツアー名 or フェス名]"
+      "title" : "[ツアー名 or フェス名]",
       "date_time": "[開演日]",
       "pref_id": "[都道府県ID]",
       "pref_name": "[都道府県名]",
@@ -77,7 +77,7 @@ $ticketPia->echoJson($ticketPia->getList());
 ```
 [
   {
-    "title" : "[ツアー名 or フェス名]"
+    "title" : "[ツアー名 or フェス名]",
     "date_time": "[開演日]",
     "pref_id": "[都道府県ID]",
     "pref_name": "[都道府県名]",
@@ -87,7 +87,7 @@ $ticketPia->echoJson($ticketPia->getList());
     "link": "[link]"
   },
   {
-    "title" : "[ツアー名 or フェス名]"
+    "title" : "[ツアー名 or フェス名]",
     "date_time": "[開演日]",
     "pref_id": "[都道府県ID]",
     "pref_name": "[都道府県名]",
