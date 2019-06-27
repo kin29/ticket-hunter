@@ -23,9 +23,10 @@ abstract class AbstractTicketVendor
         $this->requestUrl = $url;
     }
 
-    public function setKeyword(string $keyWord = ''): AbstractTicketVendor
+    public function setKeyword(string $keyWord = '') : self
     {
         $this->requestUrl .= urlencode($keyWord);
+
         return $this;
     }
 
