@@ -12,7 +12,7 @@ class TicketHunter
 
     public $arrVendorObj = [];
 
-    public function __construct(array $arrVendorName)
+    public function __construct(array $arrVendorName = [])
     {
         foreach ($arrVendorName as $vendorName) {
             $className = __NAMESPACE__ . '\\Seller\\' . $vendorName;
@@ -23,7 +23,7 @@ class TicketHunter
         }
     }
 
-    public function getList(string $keyWord) : array
+    public function getList(string $keyWord = '') : array
     {
         $vendorList = [];
         foreach ($this->arrVendorObj as $name => $obj) {

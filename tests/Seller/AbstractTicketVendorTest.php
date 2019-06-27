@@ -16,11 +16,26 @@ class AbstractTicketVendorTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->abstractTicket = $this->getMockForAbstractClass(AbstractTicketVendor::class, [new Client]);
+        $mockClient = $this->getMockBuilder(Client::class)
+            ->getMock();
+        $this->abstractTicket = $this->getMockForAbstractClass(AbstractTicketVendor::class, [$mockClient, 'https://test.com?keyword=']);
     }
 
-    public function test_stub() : void
+    public function test__construct() : void
     {
-        $this->assertSame(1, 1);
+        $this->assertInstanceOf(Client::class, $this->abstractTicket->client);
+        $this->assertSame('https://test.com?keyword=', $this->abstractTicket->requestUrl);
+    }
+
+    public function test_setKeyword_引数セットなし() : void
+    {
+        $this->abstractTicket->setKeyword();
+        $this->assertSame('https://test.com?keyword=', $this->abstractTicket->requestUrl);
+    }
+
+    public function test_setKeyword_引数セットあり() : void
+    {
+        $this->abstractTicket->setKeyword('test');
+        $this->assertSame('https://test.com?keyword=test', $this->abstractTicket->requestUrl);
     }
 }

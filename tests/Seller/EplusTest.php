@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kin29\TicketHunter\Seller;
 
+use Kin29\TicketHunter\Fake\Client;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -27,12 +28,55 @@ class EplusTest extends TestCase
 
         $this->convertDate = $reflection->getMethod('convertDate');
         $this->convertDate->setAccessible(true);
+
+        $this->eplus->client = new Client\Eplus;
     }
 
     public function testIsInstanceOfEplus() : void
     {
         $actual = $this->eplus;
         $this->assertInstanceOf(AbstractTicketVendor::class, $actual);
+    }
+
+    public function test_getList() : void
+    {
+        $expect = [
+            [
+                'title' => 'japan tour',
+                'date_time' => '2019/1/1(火)',
+                'pref_id' => '13',
+                'pref_name' => '東京都',
+                'stage' => '日本武道館',
+                'sale_method' => '先着',
+                'sale_status' => '予定枚数終了',
+                'link' => 'https://eplus.jp/url_pc_test',
+            ],
+            [
+                'title' => 'japan tour2',
+                'date_time' => '2019/1/2(水)',
+                'pref_id' => '12',
+                'pref_name' => '千葉県',
+                'stage' => '幕張メッセ',
+                'sale_method' => '一般',
+                'sale_status' => '休演',
+                'link' => 'https://eplus.jp/url_pc_test2',
+            ],
+            [
+                'title' => 'japan tour3',
+                'date_time' => '2019/1/3(木)',
+                'pref_id' => '40',
+                'pref_name' => '福岡県',
+                'stage' => 'マリンメッセ福岡',
+                'sale_method' => '一般',
+                'sale_status' => '扱いなし',
+                'link' => 'https://eplus.jp/url_pc_test3',
+            ],
+        ];
+
+        $this->assertSame(
+            $expect,
+            $this->eplus->getList()
+        );
     }
 
     public function test_convertDate() : void

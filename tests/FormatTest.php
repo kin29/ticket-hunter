@@ -20,6 +20,21 @@ class FormatTest extends TestCase
         };
     }
 
+    public function test_toJson() : void
+    {
+        $arrList = ['foo', 'bar'];
+        $this->assertSame(json_encode($arrList), $this->formatObj->toJson($arrList));
+    }
+
+    public function test_echoJson() : void
+    {
+        $arrList = ['foo', 'bar'];
+        ob_start();
+        $this->formatObj->echoJson($arrList);
+        $actual = ob_get_clean();
+        $this->assertSame(json_encode($arrList), $actual);
+    }
+
     public function test_format() : void
     {
         $title = 'テスト公演';
