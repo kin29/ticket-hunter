@@ -14,8 +14,8 @@ You can choose.
 composer require kin29/ticket-hunter
 ```
 
-### when you search multiple ticket-saller
-※has key(=ticket-saller name)
+### when you search multiple ticket-seller
+※has key(=ticket-seller name)
 ```php
 try {
   $ticketVendors = new Kin29\TicketHunter\TicketHunter(['TicketPia', 'Eplus', 'LawsonTicket']);
@@ -67,7 +67,7 @@ try {
 ```
   
   
-### when you search single ticket-saller
+### when you search single ticket-seller
 ```php
 // TicketPiaの場合
 $ticketPia = new Kin29\TicketHunter\Seller\TicketPia();
