@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Kin29\TicketHunter\Seller;
 
+use Goutte\Client;
+
 class TicketPia extends AbstractTicketVendor
 {
-    public function __construct(string $keyWord)
+    public function __construct()
     {
         $url = 'https://t.pia.jp/pia/rlsInfo.do?kw=';
-        parent::__construct($keyWord, $url);
+        parent::__construct(new Client, $url);
     }
 
     public function getList() : array

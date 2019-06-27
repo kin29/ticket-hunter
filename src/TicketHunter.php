@@ -12,22 +12,22 @@ class TicketHunter
 
     public $arrVendorObj = [];
 
-    public function __construct(array $arrVendorName, string $keyWord)
+    public function __construct(array $arrVendorName)
     {
         foreach ($arrVendorName as $vendorName) {
             $className = __NAMESPACE__ . '\\Seller\\' . $vendorName;
             if (!class_exists($className)) {
                 throw new LogicException("Class \"{$className}\" not found\n");
             }
-            $this->arrVendorObj[$vendorName] = new $className($keyWord);
+            $this->arrVendorObj[$vendorName] = new $className;
         }
     }
 
-    public function getList() : array
+    public function getList(string $keyWord) : array
     {
         $vendorList = [];
         foreach ($this->arrVendorObj as $name => $obj) {
-            $vendorList[$name] = $obj->getList();
+            $vendorList[$name] = $obj->setKeyword($keyWord)->getList();
         }
 
         return $vendorList;

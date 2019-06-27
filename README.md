@@ -18,8 +18,8 @@ composer require kin29/ticket-hunter
 ※has key(=ticket-saller name)
 ```php
 try {
-  $ticketVendors = new Kin29\TicketHunter\TicketHunter(['TicketPia', 'Eplus', 'LawsonTicket'], '[artist-name(or keyword)]');
-  $ticketVendors->echoJson($ticketVendors->getList());
+  $ticketVendors = new Kin29\TicketHunter\TicketHunter(['TicketPia', 'Eplus', 'LawsonTicket']);
+  $ticketVendors->echoJson($ticketVendors->getList('[artist-name(or keyword)]'));
 } catch (\Exception $e) {
     die($e->getMessage());
 }
@@ -70,8 +70,8 @@ try {
 ### when you search single ticket-saller
 ```php
 // TicketPiaの場合
-$ticketPia = new Kin29\TicketHunter\Seller\TicketPia('[artist-name(or keyword)]');
-$ticketPia->echoJson($ticketPia->getList());
+$ticketPia = new Kin29\TicketHunter\Seller\TicketPia();
+$ticketPia->echoJson($ticketPia->setKeyword('[artist-name(or keyword)]')->getList());
 ```
 
 ```

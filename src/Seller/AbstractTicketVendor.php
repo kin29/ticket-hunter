@@ -11,13 +11,22 @@ abstract class AbstractTicketVendor
 {
     use Format;
 
+    /** @var $client Goutte\Client */
     public $client;
+
+    /** @var $requestUrl string */
     public $requestUrl;
 
-    public function __construct(string $keyWord = '', string $url = '')
+    public function __construct(Client $client, string $url = '')
     {
-        $this->client = new Client();
-        $this->requestUrl = $url . urlencode($keyWord);
+        $this->client = $client;
+        $this->requestUrl = $url;
+    }
+
+    public function setKeyword(string $keyWord = ''): AbstractTicketVendor
+    {
+        $this->requestUrl .= urlencode($keyWord);
+        return $this;
     }
 
     abstract public function getList() : array;
