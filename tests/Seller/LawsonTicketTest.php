@@ -22,7 +22,7 @@ class LawsonTicketTest extends TestCase
         $this->lawsonTicket->client = new Client\LawsonTicket;
     }
 
-    public function testIsInstanceOfEplus() : void
+    public function testIsInstanceOfLawsonTicket() : void
     {
         $actual = $this->lawsonTicket;
         $this->assertInstanceOf(AbstractTicketVendor::class, $actual);
@@ -30,7 +30,22 @@ class LawsonTicketTest extends TestCase
 
     public function test_getList() : void
     {
-        //todo
-        $this->assertSame(1, 1);
+        $expect = [
+            [
+                'title' => 'japan tour',
+                'date_time' => '2019/1/1(火)',
+                'pref_id' => '13',
+                'pref_name' => '東京都',
+                'stage' => '日本武道館',
+                'sale_method' => '先着',
+                'sale_status' => '予定枚数終了',
+                'link' => 'https://l-tike.com/order/?gLcode=1111&gPfKey=2019010101010101&gEntryMthd=01&gScheduleNo=1&gPfName=japan%2Btour&gBaseVenueCd=22222',
+            ],
+        ];
+
+        $this->assertSame(
+            $expect,
+            $this->lawsonTicket->getList()
+        );
     }
 }

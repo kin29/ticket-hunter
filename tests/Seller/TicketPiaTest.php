@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kin29\TicketHunter\Seller;
 
-//use Kin29\TicketHunter\Fake\Client;
+use Kin29\TicketHunter\Fake\Client;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,7 +19,7 @@ class TicketPiaTest extends TestCase
     {
         $this->ticketPia = new TicketPia;
         $this->ticketPia->setKeyword('test');
-        //$this->ticketPia->client = new Client\TicketPia;
+        $this->ticketPia->client = new Client\TicketPia;
     }
 
     public function testIsInstanceOfTicketPia() : void
@@ -30,7 +30,22 @@ class TicketPiaTest extends TestCase
 
     public function test_getList() : void
     {
-        //todo
-        $this->assertSame(1, 1);
+        $expect = [
+            [
+                'title' => 'japan tour',
+                'date_time' => '2019/1/1(火)',
+                'pref_id' => '13',
+                'pref_name' => '東京都',
+                'stage' => '日本武道館',
+                'sale_method' => '先着',
+                'sale_status' => '予定枚数終了',
+                'link' => 'https://kin29.info/',
+            ],
+        ];
+
+        $this->assertSame(
+            $expect,
+            $this->ticketPia->getList()
+        );
     }
 }

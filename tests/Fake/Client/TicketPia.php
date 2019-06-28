@@ -6,58 +6,89 @@ namespace Kin29\TicketHunter\Fake\Client;
 
 class TicketPia
 {
-    public $filterStr = '';
+    private $nodes = [];
+    private $selector = '';
+
+    public function __construct()
+    {
+        $this->nodes = [
+            [
+                'title' => 'japan tour',
+                'date_time' => '2019/1/1(火)',
+                'pref_id' => '13',
+                'pref_name' => '東京都',
+                'stage' => '日本武道館',
+                'sale_method' => '先着',
+                'sale_status' => '予定枚数終了',
+                'link' => 'https://kin29.info/',
+            ],
+        ];
+    }
 
     public function request() : TicketPia
     {
         return $this;
     }
 
-    public function filter(string $str = '') : TicketPia
+    public function filter($selector) : TicketPia
     {
-        $this->filterStr = $str;
+        $this->selector = $selector;
         return $this;
     }
 
-    public function each() : array
+    private function createSubCrawler($nodes) : TicketPia
     {
-        return [$this, $this];
+        unset($nodes); //不要
+        return $this;
+    }
+
+    public function each(\Closure $closure) : array
+    {
+        $data = [];
+        foreach ($this->nodes as $i => $node) {
+            $data[] = $closure($this->createSubCrawler($node), $i);
+        }
+
+        return $data;
     }
 
     public function text() : string
     {
-        switch ($this->filterStr) {
+        $node = $this->nodes[0];
+        switch ($this->selector) {
             case '.list_01':
-                return 'japan tour';
+                return $node['title'];
                 break;
 
             case '.list_02 .img_status':
-                return '先着';
+                return $node['sale_method'];
                 break;
 
             case '.list_02 .img_status + td':
-                return '予定枚数終了';
+                return $node['sale_status'];
                 break;
 
             case '.list_03':
-                return '2019/1/1(火)';
+                return $node['date_time'];
                 break;
 
             case '.list_04':
-                return '日本武道館(東京都)';
+                return "{$node['stage']}({$node['pref_name']})";
                 break;
-            
+
             default:
                 return '';
                 break;
         }
     }
 
-    public function attr() : string
+    public function attr($attribute) : string
     {
-        switch ($this->filterStr) {
+        unset($attribute); //不要
+        $node = $this->nodes[0];
+        switch ($this->selector) {
             case 'div .list_img a':
-                return 'https://kin29.info/';
+                return $node['link'];
                 break;
             
             default:
