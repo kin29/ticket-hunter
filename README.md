@@ -16,13 +16,23 @@ composer require kin29/ticket-hunter
 
 ### when you search multiple ticket-seller
 ※has key(=ticket-seller name)
+
+- ticket-hunter/exmple.php
 ```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
 try {
-  $ticketVendors = new Kin29\TicketHunter\TicketHunter(['TicketPia', 'Eplus', 'LawsonTicket']);
-  $ticketVendors->echoJson($ticketVendors->getList('[artist-name(or keyword)]'));
+  $ticketVendors = new Kin29\TicketHunter\TicketHunter(['TicketPia', 'Eplus']);
+  $ticketVendors->echoJson($ticketVendors->getList('雨のパレード'));
 } catch (\Exception $e) {
     die($e->getMessage());
 }
+```
+
+```bash
+php ticket-hunter/example.php | jq
 ```
 
 ```
