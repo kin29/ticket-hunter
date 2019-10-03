@@ -11,7 +11,8 @@ You can choose.
 
 ## how to use
 ```bash
-composer require kin29/ticket-hunter
+git clone git@github.com:kin29/ticket-hunter.git
+composer install
 ```
 
 ### when you search multiple ticket-seller
@@ -112,5 +113,4 @@ $ticketPia->echoJson($ticketPia->setKeyword('[artist-name(or keyword)]')->getLis
 ## PHPUnti Test Covarage
 !!!Congratulations １００％!!!
 ![covarage_100per.png](https://user-images.githubusercontent.com/12015851/60320239-13fcac00-99b4-11e9-85dd-c4e7cb9c5067.png)
-  
   
