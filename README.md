@@ -7,7 +7,7 @@ If you use this, You Should be able to take tickets difficult to obtain.
 You can choose.
 - TicketPia
 - Eplus
-- LawsonTicket
+- LawsonTicket　※ unenable now
 
 ## how to use
 ```bash
